@@ -2,6 +2,58 @@
 
 {% block content %}
 
-<h1>Tasks</h1>
+{% if tasks %}
+<div class="fs-2 text-info m-5">
+    {{title}}
+</div>
+<div class="text-center my-5">
+    {% if tasks.0.datecompleted is None %}
+    <h1>Tasks</h1>
+{% else %}
+    <h1>Completed Tasks</h1>
+{% endif %}
+</div>
+
+
+
+<div class="main container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <ul class="list-group">
+                {% for task in tasks %}
+                <a class="list-group-item" href="{% url "task_detail" task.id %}">
+                    <header class="d-flex justify-content-between">
+                        
+                        <strong>{{task.title}}</strong>
+                        {% if task.important  %}
+                        <div class="fs-4">
+                            ❗
+                        </div>
+                    
+                        
+                        {% endif %}
+                        
+
+                    </header>
+                    
+                    
+            
+                        <p>{{task.description}}</p>
+                        <p>{{ask.user.username}}</p>
+            
+                        <p>{{task.datecompleted|date:'M j Y:i'}} </p>
+                </a>
+                
+                
+                {% endfor %}
+            </ul>
+        </div>
+        
+    </div>
+{% else %}
+<div class="fs-2 text-info m-5">{{title}}</div>
+{% endif %}
+
+</div>
 
 {% endblock %}

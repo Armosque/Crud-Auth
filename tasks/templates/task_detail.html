@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+<h2 class="m-5">{{task.title}}</h2>
+
+<div class="main container">
+    <div class="row">
+        <div class="col-md-4 card card-body">
+            <form method="POST">
+                {{error}}
+                {% csrf_token %}
+                {{form.as_p}}
+                
+                <div class="d-flex gap-2 justify-content-center">
+                    <button class="btn btn-primary"{% if task.datecompleted %}disabled{% endif %}> Update</button>
+                    <form action="{% url 'complete_task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" {% if task.datecompleted %}disabled{% endif %}>complete</button>
+                    </form>
+                    <form action="{% url 'delete_task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">delete</button>
+                    </form>
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock  %}

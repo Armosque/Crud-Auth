@@ -2,17 +2,42 @@
 
 {% block content%}
 
-<h1>SignUp</h1>
 
-{{error}}
 
-<form  method='POST'> 
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>
-        signup
-    </button>
-</form>
+
+
+<main class="container py-5 ">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form  method='POST' class="card card-body">
+                <div class="text-danger text-left mb-4">
+                    {{error}}
+                </div>
+        
+                <h1 class=" text-center">Sign Up</h1>
+                {% csrf_token %}
+                <div class="md-4">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Write your name">
+                </div>
+                <div class="md-4">
+                    <label for="password1">Password</label>
+                    <input type="Password" name="password1" id="password1" class="form-control" placeholder="Write your password">
+                </div>
+                <div class="md-4">
+                    <label for="password2">Confirm Password</label>
+                    <input type="Password" name="password2" id="password2" class="form-control" placeholder="Confirm  your password">
+                </div>
+                <button class="btn btn-primary">
+                    signup
+                </button>
+            </form>
+        </div>
+
+    </div>
+</main>
+
+
 
 {% endblock %}
 
